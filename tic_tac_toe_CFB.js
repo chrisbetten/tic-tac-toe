@@ -24,8 +24,8 @@ function printBoard(board) {
 
 // // Checks if any row contains three matching symbols
 function winningRow(board) {
-  for (let i = 0; i < board.length; i++) {
-    if (board[i].every((item) => item === board[i][0])) {
+  for (row of board) {
+    if (row.every((item) => item === row[0])) {
       return true;
     }
   }
@@ -41,8 +41,8 @@ function winningColumn(board) {
   
 // // Flips the board by turning the columns into rows
   while (counter < board[0].length) {
-    for (let i = 0; i < board.length; i++) {
-      column.push(board[i][counter]);
+    for (row of board) {
+      column.push(row[counter]);
     }
     columnBoard.push(column);
     column = [];
@@ -75,9 +75,9 @@ function gameWon(a, b, c) {
 function boardIsFull(board) {
   let filledPositions = 0;
 
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[0].length; j++) {
-      if (board[i][j] === 'X' || board[i][j] === 'O') {
+  for (row of board) {
+    for (cell of row) {
+      if (cell === 'X' || cell === 'O') {
         filledPositions++;
       }
     }
@@ -100,10 +100,10 @@ function playerTurn(playerNum) {
         let playerInput = prompt(colors.yellow(`PLAYER ${playerNum} (${playerSymbol}): Choose where you want to put your ${playerSymbol} (1-9) `));
         playerInput = Number(playerInput);
     
-        for (let i = 0; i < board.length; i++) {
-          if (board[i].includes(playerInput)) {
-            let column = board[i].indexOf(playerInput);
-            board[i][column] = playerSymbol;
+        for (row of board) {
+          if (row.includes(playerInput)) {
+            let cell = row.indexOf(playerInput);
+            row[cell] = playerSymbol;
             rowContainsInput = true;
             break;
           }
